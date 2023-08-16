@@ -7,25 +7,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
+@NamedQuery(name = "product.queryByName", query = "SELECT P.price FROM Product AS P WHERE P.name = :name")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-//	@Column(name="nombre")
+//	@Column(name="name")
 	private String name;
 	private String description;
 	private BigDecimal price;
 	private LocalDate registryDate = LocalDate.now();
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Category category;
 	
 	public Product() {
@@ -36,6 +39,7 @@ public class Product {
 		this.price = price;
 		this.category = category;
 	}
+	
 	public Long getId() {
 		return id;
 	}

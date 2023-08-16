@@ -23,4 +23,8 @@ public class CategoryDao {
 		category = this.em.merge(category);
 		this.em.remove(category);
 	}
+	public Category queryByName(String name){
+		String jpql =" SELECT C FROM Category AS C WHERE C.name=:name ";
+		return em.createQuery(jpql,Category.class).setParameter("name", name).getSingleResult();
+	}
 }
