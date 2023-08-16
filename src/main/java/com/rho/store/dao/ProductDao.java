@@ -37,15 +37,14 @@ public class ProductDao {
 		return em.createQuery(jqpl, Product.class).setParameter("name", name).getResultList();
 	}
 	
-	public List<Product> queryByCategory(String nameCategory){
-		String jqpl = "SELECT P FROM Product AS P WHERE P.category.name=:nameCategory";
-		return  em.createQuery(jqpl, Product.class).setParameter("nameCategory", nameCategory).getResultList();
+	public List<Product> queryByCategory(String name){
+		String jqpl = "SELECT P FROM Product AS P WHERE P.category.name=:name";
+		return  em.createQuery(jqpl, Product.class).setParameter("name", name).getResultList();
 	}
 	
-	public BigDecimal queryPriceBYName(String name) {
+	public BigDecimal queryPriceByName(String name) {
 		return em.createNamedQuery("product.queryByName", BigDecimal.class).setParameter("name", name).getSingleResult();
 	}
-	
 //	public List<Product> consultarPorParametros(String nombre, BigDecimal precio,LocalDate fecha){
 //	    StringBuilder jpql=new StringBuilder("SELECT p FROM Product p WHERE 1=1 ");
 //

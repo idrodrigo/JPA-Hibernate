@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import com.rho.store.dao.CategoryDao;
 import com.rho.store.dao.ProductDao;
 import com.rho.store.model.Category;
+import com.rho.store.model.CategoryId;
 import com.rho.store.model.Product;
 import com.rho.store.utils.JPAUtils;
 
@@ -65,11 +66,14 @@ public class ProductRegistry {
 			System.out.println(p.getName());
 		}
 		
-		List<Product> filteredProductsByCategory = productDao.queryByCategory("PHONES");
-		filteredProductsByCategory.forEach(p->System.out.println(p.getName()));
+//		List<Product> filteredProductsByCategory = productDao.queryByCategory("PHONES");
+//		filteredProductsByCategory.forEach(p->System.out.println(p.getName()));
 		
-		BigDecimal price = productDao.queryPriceBYName("Iphone 11");
+		BigDecimal price = productDao.queryPriceByName("Iphone 11");
 		System.out.println(price);
+		
+		Category find = em.find(Category.class, new CategoryId("PHONES", "1234"));
+		System.out.println(find.getName());
 		
 	}
 
